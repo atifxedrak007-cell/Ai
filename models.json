@@ -1,0 +1,23 @@
+{
+  "models": [
+    {"name": "Gemini 2.5 Flash", "provider": "gemini", "base_url": "https://generativelanguage.googleapis.com/v1beta", "model_id": "gemini-2.5-flash", "api_key_env": "GEMINI_API_KEY", "enabled": true},
+    {"name": "Gemini 2.5 Pro", "provider": "gemini", "base_url": "https://generativelanguage.googleapis.com/v1beta", "model_id": "gemini-2.5-pro", "api_key_env": "GEMINI_API_KEY", "enabled": true},
+    {"name": "Groq Llama 3.3 70B", "provider": "openai-compatible", "base_url": "https://api.groq.com/openai/v1", "model_id": "llama-3.3-70b-versatile", "api_key_env": "GROQ_API_KEY", "enabled": true},
+    {"name": "Cerebras Llama 3.3 70B", "provider": "openai-compatible", "base_url": "https://api.cerebras.ai/v1", "model_id": "llama-3.3-70b", "api_key_env": "CEREBRAS_API_KEY", "enabled": true},
+    {"name": "OpenRouter DeepSeek V3 (free)", "provider": "openai-compatible", "base_url": "https://openrouter.ai/api/v1", "model_id": "deepseek/deepseek-chat-v3-0324:free", "api_key_env": "OPENROUTER_API_KEY", "enabled": true},
+    {"name": "OpenRouter Llama 3.3 70B (free)", "provider": "openai-compatible", "base_url": "https://openrouter.ai/api/v1", "model_id": "meta-llama/llama-3.3-70b-instruct:free", "api_key_env": "OPENROUTER_API_KEY", "enabled": true},
+    {"name": "Mistral Small", "provider": "openai-compatible", "base_url": "https://api.mistral.ai/v1", "model_id": "mistral-small-latest", "api_key_env": "MISTRAL_API_KEY", "enabled": true},
+    {"name": "DeepSeek Chat", "provider": "openai-compatible", "base_url": "https://api.deepseek.com/v1", "model_id": "deepseek-chat", "api_key_env": "DEEPSEEK_API_KEY", "enabled": true},
+    {"name": "Together Llama 3.3 70B", "provider": "openai-compatible", "base_url": "https://api.together.xyz/v1", "model_id": "meta-llama/Llama-3.3-70B-Instruct-Turbo", "api_key_env": "TOGETHER_API_KEY", "enabled": true},
+    {"name": "NVIDIA NIM Llama 3.3 70B", "provider": "openai-compatible", "base_url": "https://integrate.api.nvidia.com/v1", "model_id": "meta/llama-3.3-70b-instruct", "api_key_env": "NVIDIA_API_KEY", "enabled": true},
+    {"name": "OpenAI GPT-4o mini", "provider": "openai-compatible", "base_url": "https://api.openai.com/v1", "model_id": "gpt-4o-mini", "api_key_env": "OPENAI_API_KEY", "enabled": true},
+    {"name": "Claude Sonnet", "provider": "anthropic", "base_url": "https://api.anthropic.com/v1", "model_id": "claude-sonnet-5-5", "api_key_env": "ANTHROPIC_API_KEY", "enabled": true},
+    {"name": "Claude Haiku", "provider": "anthropic", "base_url": "https://api.anthropic.com/v1", "model_id": "claude-haiku-5-5", "api_key_env": "ANTHROPIC_API_KEY", "enabled": true}
+  ],
+  "roles": {
+    "backend_reviewer": "Gemini 2.5 Flash",
+    "syntax_reviewer": "Groq Llama 3.3 70B",
+    "workflow_runner": "Cerebras Llama 3.3 70B",
+    "chat": "Gemini 2.5 Flash"
+  }
+}

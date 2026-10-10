@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0c121c">
+<title>AI Code Review</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="url-row">
+    <span class="url-label" data-i18n="public_url"></span>
+    <a id="pubUrl" class="url" target="_blank" rel="noopener noreferrer"></a>
+    <button id="copyUrl" class="btn sm" hidden data-i18n="copy"></button>
+  </div>
+  <div class="top-actions">
+    <button id="langBtn" class="btn sm" title="Language">EN</button>
+    <button id="logoutBtn" class="btn sm" hidden data-i18n="logout"></button>
+  </div>
+</header>
+<div id="lockedBanner" class="banner bad" hidden data-i18n="locked_msg"></div>
+<div id="projBar" class="projbar" hidden></div>
+
+<nav class="tabs" id="tabs" role="tablist">
+  <button data-tab="upload" class="on" data-i18n="tab_upload"></button>
+  <button data-tab="workflow" data-i18n="tab_workflow"></button>
+  <button data-tab="reviewers" data-i18n="tab_reviewers"></button>
+  <button data-tab="chat" data-i18n="tab_chat"></button>
+  <button data-tab="settings" data-i18n="tab_settings"></button>
+  <button data-tab="history" data-i18n="tab_history"></button>
+</nav>
+
+<main>
+  <section id="tab-upload" class="panel on">
+    <div class="card">
+      <h2 data-i18n="upload_title"></h2>
+      <p class="muted" data-i18n="upload_hint"></p>
+      <label class="drop" for="fileInput"><span id="dropText" data-i18n="choose_files"></span></label>
+      <input id="fileInput" type="file" multiple hidden>
+      <input id="projName" class="inp" maxlength="60" data-i18n-ph="project_name">
+      <button id="uploadBtn" class="btn primary" data-i18n="upload_btn"></button>
+    </div>
+    <div id="uploadResult"></div>
+  </section>
+
+  <section id="tab-workflow" class="panel">
+    <div id="wfEmpty" class="card muted" data-i18n="need_project"></div>
+    <div id="wfBody" hidden>
+      <div class="row">
+        <button id="runBtn" class="btn primary" data-i18n="run_new"></button>
+        <button id="rerunBtn" class="btn" data-i18n="rerun"></button>
+        <button id="stopBtn" class="btn danger" data-i18n="stop" disabled></button>
+      </div>
+      <div class="row status-row"><span id="runStatus" class="badge pending"></span><span id="planInfo" class="muted small"></span></div>
+      <div id="planWarn"></div>
+      <div id="steps"></div>
+    </div>
+  </section>
+
+  <section id="tab-reviewers" class="panel">
+    <div id="rvEmpty" class="card muted" data-i18n="need_project"></div>
+    <div id="rvBody" hidden>
+      <div class="row">
+        <button id="reviewBtn" class="btn primary" data-i18n="review_now"></button>
+        <label class="check"><input type="checkbox" id="withLogs" checked> <span data-i18n="with_logs"></span></label>
+      </div>
+      <div class="subtabs" id="rvTabs">
+        <button data-rv="backend_reviewer" class="on"><span data-i18n="backend"></span> <i class="dot" id="dot-backend_reviewer"></i></button>
+        <button data-rv="syntax_reviewer"><span data-i18n="syntax"></span> <i class="dot" id="dot-syntax_reviewer"></i></button>
+        <button data-rv="summary"><span data-i18n="summary"></span> <i class="dot" id="dot-summary"></i></button>
+      </div>
+      <div id="rvPane"></div>
+    </div>
+  </section>
+
+  <section id="tab-chat" class="panel">
+    <div id="chatLog" class="chatlog"></div>
+    <label class="check"><input type="checkbox" id="chatCtx" checked> <span data-i18n="chat_ctx"></span></label>
+    <div class="chat-input">
+      <textarea id="chatMsg" class="inp" rows="2" data-i18n-ph="chat_ph"></textarea>
+      <button id="chatSend" class="btn primary" data-i18n="send"></button>
+    </div>
+    <button id="chatClear" class="btn sm" data-i18n="clear"></button>
+  </section>
+
+  <section id="tab-settings" class="panel">
+    <div class="card">
+      <h2 data-i18n="roles_title"></h2>
+      <div id="roles"></div>
+    </div>
+    <div class="card">
+      <h2 data-i18n="models_title"></h2>
+      <p class="muted small" data-i18n="keys_hint"></p>
+      <div id="modelList"></div>
+    </div>
+    <div class="card">
+      <h2 data-i18n="add_model"></h2>
+      <form id="addForm" class="form" autocomplete="off">
+        <input class="inp" name="name" required data-i18n-ph="f_name">
+        <select class="inp" name="provider" id="provSel"></select>
+        <input class="inp" name="base_url" required data-i18n-ph="f_base">
+        <input class="inp" name="model_id" required data-i18n-ph="f_model">
+        <input class="inp" name="api_key_env" required pattern="[A-Z][A-Z0-9_]+" data-i18n-ph="f_env">
+        <button class="btn primary" type="submit" data-i18n="add"></button>
+      </form>
+    </div>
+  </section>
+
+  <section id="tab-history" class="panel">
+    <div id="historyList"></div>
+  </section>
+</main>
+<div id="toast" role="status"></div>
+<script src="/static/app.js"></script>
+</body>
+</html>

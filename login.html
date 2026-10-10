@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0c121c">
+<title>Login</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin:0; min-height:100vh; display:grid; place-items:center; background:#0c121c; color:#e4ebf5;
+         font-family:"Noto Sans Bengali","Hind Siliguri",system-ui,sans-serif; }
+  form { width:min(92vw,340px); background:#141c2b; border:1px solid #263248; border-radius:14px; padding:22px; }
+  h1 { font-size:20px; margin:0 0 14px; }
+  input,button { width:100%; box-sizing:border-box; padding:12px; font-size:16px; border-radius:10px; border:1px solid #263248; }
+  input { background:#0c121c; color:inherit; margin-bottom:10px; }
+  button { background:#8aa4ff; color:#0c121c; font-weight:600; border:0; cursor:pointer; }
+  #msg { color:#ff7a8a; min-height:20px; font-size:14px; margin-top:8px; }
+</style>
+</head>
+<body>
+<form id="f">
+  <h1>AI Code Review</h1>
+  <input id="pw" type="password" placeholder="Password / পাসওয়ার্ড" autocomplete="current-password" autofocus required>
+  <button type="submit">Login / লগইন</button>
+  <div id="msg"></div>
+</form>
+<script>
+document.getElementById("f").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const msg = document.getElementById("msg"); msg.textContent = "";
+  try {
+    const r = await fetch("/api/login", {method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({password: document.getElementById("pw").value})});
+    if (r.ok) location.href = "/";
+    else msg.textContent = r.status === 429 ? "Too many attempts. Wait a few minutes." : "Wrong password / ভুল পাসওয়ার্ড";
+  } catch (_) { msg.textContent = "Network error"; }
+});
+</script>
+</body>
+</html>
